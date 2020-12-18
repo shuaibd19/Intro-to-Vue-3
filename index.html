@@ -13,7 +13,7 @@
       <div class="cart">Cart({{cart}})</div>
       <div class="product-info">
         <h1>{{ product }}</h1>
-        <div class="product-image">
+        <div class="product-image" :class="{outOfStockImg: inventory < 1}">
           <!-- image goes here -->
           <img :src="image" alt="socks" />
         </div>
@@ -31,7 +31,14 @@
           class="color-circle"
           :style="{backgroundColor: variant.colour}"
         ></div>
-        <button class="button" @click="onAddToCart">Add to Cart</button>
+        <button
+          class="button"
+          :class="{disabledButton: inventory < 1}"
+          :disabled="inventory < 1"
+          @click="onAddToCart"
+        >
+          Add to Cart
+        </button>
         <button class="button" @click="onEmptyCart">Empty Cart</button>
       </div>
     </div>
