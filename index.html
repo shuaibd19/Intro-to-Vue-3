@@ -10,45 +10,17 @@
   </head>
   <body>
     <div id="app">
-      <div class="cart">Cart({{cart}})</div>
-      <div class="product-info">
-        <h1>{{ product }}</h1>
-        <div class="product-image" :class="{outOfStockImg: inventory < 1}">
-          <!-- image goes here -->
-          <img :src="image" alt="socks" />
-        </div>
-        <p>{{ description }}</p>
-        <p v-if="inventory > 10">In Stock</p>
-        <p v-else-if="inventory <= 10 && inventory > 0">Almost run out!</p>
-        <p v-else>Out of Stock</p>
-        <ul>
-          <li v-for="detail in details">{{detail}}</li>
-        </ul>
-        <div
-          v-for="variant in variants"
-          :key="variant.id"
-          @mouseover="updateImage(variant.image)"
-          class="color-circle"
-          :style="{backgroundColor: variant.colour}"
-        ></div>
-        <button
-          class="button"
-          :class="{disabledButton: inventory < 1}"
-          :disabled="inventory < 1"
-          @click="onAddToCart"
-        >
-          Add to Cart
-        </button>
-        <button class="button" @click="onEmptyCart">Empty Cart</button>
-      </div>
-    </div>
-
-    <!-- Import Js -->
-    <script src="./main.js"></script>
-
-    <!-- Mounting the app -->
-    <script>
-      const mountedApp = app.mount("#app");
-    </script>
+      <div class="nav-bar"></div>
+      <div class="cart">Cart({{cart.length}})</div>
+      <product-display :premium="premium" @add-to-cart="updateCart" @empty-cart="emptyCart"></product-display>
   </body>
+
+  <!-- Import Js -->
+  <script src="./main.js"></script>
+  <!-- imporint the component -->
+  <script src="./assets/components/ProductDisplay.js"></script>
+  <!-- Mounting the app -->
+  <script>
+    const mountedApp = app.mount("#app");
+  </script>
 </html>
